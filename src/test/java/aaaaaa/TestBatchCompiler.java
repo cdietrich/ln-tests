@@ -5,6 +5,7 @@ import com.google.inject.Inject;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
@@ -619,20 +620,26 @@ public class TestBatchCompiler {
     Assert.assertEquals(2, ((List<String>)Conversions.doWrapArray(new File(customOutput).list(_function_1))).size());
   }
 
-  private boolean createSymLink(final String linkTarget, final String link) {
-    try {
-      final File linkFile = new File(linkTarget);
-      java.nio.file.Files.createSymbolicLink(linkFile.toPath(),new File(link).toPath());
-      TestBatchCompiler.abfalleimer.add(linkFile);
-    } catch (final Throwable _t) {
-      if (_t instanceof IOException) {
-        return false;
-      } else {
-        throw Exceptions.sneakyThrow(_t);
-      }
-    }
-    return true;
-  }
+  private boolean createSymLink(final String source, final String link) {
+	    boolean _xtrycatchfinallyexpression = false;
+	    try {
+	      boolean _xblockexpression = false;
+	      {
+	        java.nio.file.Files.deleteIfExists(new File(link).toPath());
+	    	  java.nio.file.Files.createSymbolicLink(new File(link).toPath(), new File(source).toPath());
+	        _xblockexpression = true;
+	      }
+	      _xtrycatchfinallyexpression = _xblockexpression;
+	    } catch (final Throwable _t) {
+	    	System.out.println("_t" + _t);
+	      if (_t instanceof IOException) {
+	        _xtrycatchfinallyexpression = false;
+	      } else {
+	        throw Exceptions.sneakyThrow(_t);
+	      }
+	    }
+	    return _xtrycatchfinallyexpression;
+	  }
 
   private boolean isSymlink(final File file) {
     try {
