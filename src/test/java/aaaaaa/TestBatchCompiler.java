@@ -653,23 +653,7 @@ public class TestBatchCompiler {
 	  }
 
   private boolean isSymlink(final File file) {
-    try {
-      File canon = null;
-      String _parent = file.getParent();
-      boolean _tripleEquals = (_parent == null);
-      if (_tripleEquals) {
-        canon = file;
-      } else {
-        File canonDir = file.getParentFile().getCanonicalFile();
-        String _name = file.getName();
-        File _file = new File(canonDir, _name);
-        canon = _file;
-      }
-      boolean _equals = canon.getCanonicalFile().equals(canon.getAbsoluteFile());
-      return (!_equals);
-    } catch (Throwable _e) {
-      throw Exceptions.sneakyThrow(_e);
-    }
+   return java.nio.file.Files.isSymbolicLink(file.toPath());
   }
 
   private String getContents(final String fileName) {
