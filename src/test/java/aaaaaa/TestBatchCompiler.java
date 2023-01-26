@@ -634,6 +634,7 @@ public class TestBatchCompiler {
 	        	seLinkFle.mkdirs();
 	        }
 	    	  java.nio.file.Files.createSymbolicLink(seLinkFle.toPath(), new File(source).toPath());
+	    	  System.out.println(seLinkFle);
 	        _xblockexpression = true;
 	        abfalleimer.add(seLinkFle);
 	      }
