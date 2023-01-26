@@ -627,12 +627,15 @@ public class TestBatchCompiler {
 	    try {
 	      boolean _xblockexpression = false;
 	      {
-	        MoreFiles.deleteDirectoryContents(new File(link).toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
-	        java.nio.file.Files.delete(new File(link).toPath());
-	        new File(link).mkdirs();
-	    	  java.nio.file.Files.createSymbolicLink(new File(link).toPath(), new File(source).toPath());
+	        File seLinkFle = new File(link);
+	        if (seLinkFle.exists()) {
+	        	MoreFiles.deleteDirectoryContents(seLinkFle.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
+	        	java.nio.file.Files.delete(seLinkFle.toPath());
+	        	seLinkFle.mkdirs();
+	        }
+	    	  java.nio.file.Files.createSymbolicLink(seLinkFle.toPath(), new File(source).toPath());
 	        _xblockexpression = true;
-	        abfalleimer.add(new File(link));
+	        abfalleimer.add(seLinkFle);
 	      }
 	      _xtrycatchfinallyexpression = _xblockexpression;
 	    } catch (final Throwable _t) {
