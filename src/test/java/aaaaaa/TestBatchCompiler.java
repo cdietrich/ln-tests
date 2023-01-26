@@ -1,6 +1,8 @@
 package aaaaaa;
 
 import com.google.common.base.Charsets;
+import com.google.common.io.MoreFiles;
+import com.google.common.io.RecursiveDeleteOption;
 import com.google.inject.Inject;
 import java.io.File;
 import java.io.FilenameFilter;
@@ -625,9 +627,12 @@ public class TestBatchCompiler {
 	    try {
 	      boolean _xblockexpression = false;
 	      {
-	        java.nio.file.Files.deleteIfExists(new File(link).toPath());
+	        MoreFiles.deleteDirectoryContents(new File(link).toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
+	        java.nio.file.Files.delete(new File(link).toPath());
+	        new File(link).mkdirs();
 	    	  java.nio.file.Files.createSymbolicLink(new File(link).toPath(), new File(source).toPath());
 	        _xblockexpression = true;
+	        abfalleimer.add(new File(link));
 	      }
 	      _xtrycatchfinallyexpression = _xblockexpression;
 	    } catch (final Throwable _t) {
