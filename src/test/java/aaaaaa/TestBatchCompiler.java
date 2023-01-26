@@ -622,7 +622,7 @@ public class TestBatchCompiler {
   private boolean createSymLink(final String linkTarget, final String link) {
     try {
       final File linkFile = new File(linkTarget);
-      java.nio.file.Files.createSymbolicLink(new File(link).toPath(), linkFile.toPath());
+      java.nio.file.Files.createSymbolicLink(linkFile.toPath(),new File(link).toPath());
       TestBatchCompiler.abfalleimer.add(linkFile);
     } catch (final Throwable _t) {
       if (_t instanceof IOException) {
