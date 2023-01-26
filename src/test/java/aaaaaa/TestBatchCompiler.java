@@ -628,13 +628,15 @@ public class TestBatchCompiler {
 	      boolean _xblockexpression = false;
 	      {
 	        File seLinkFle = new File(link);
+	        System.out.println(seLinkFle);
+	        System.out.println(source);
 	        if (seLinkFle.exists()) {
 	        	MoreFiles.deleteDirectoryContents(seLinkFle.toPath(), RecursiveDeleteOption.ALLOW_INSECURE);
 	        	java.nio.file.Files.delete(seLinkFle.toPath());
 	        	seLinkFle.mkdirs();
 	        }
 	    	  java.nio.file.Files.createSymbolicLink(seLinkFle.toPath(), new File(source).toPath());
-	    	  System.out.println(seLinkFle);
+	    	  
 	        _xblockexpression = true;
 	        abfalleimer.add(seLinkFle);
 	      }
